@@ -50,7 +50,7 @@ func main() {
 }
 
 func handleFunc(w http.ResponseWriter, r *http.Request) {
-	fmt.Printf("-->From: %v To: %v Method: %v\n", r.RemoteAddr, r.URL, r.Method)
+	fmt.Printf("--> From: %v To: %v Method: %v\n", r.RemoteAddr, r.URL, r.Method)
 
 	// Construct filtered header to send to origin server
 	hh := http.Header{}
