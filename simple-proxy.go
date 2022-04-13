@@ -35,6 +35,7 @@ var passthruResponseHeaderKeys = [...]string{
 
 func main() {
 	
+	fmt.Println("Starting proxy...")
 
 	handler := http.DefaultServeMux
 
