@@ -22,5 +22,5 @@ export OE_SIMULATION=1
 
 ego-go build simple-proxy.go
 ego sign simple-proxy
-ego run simple proxy
+ego run simple-proxy
 ```
