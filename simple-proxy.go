@@ -34,7 +34,7 @@ var passthruResponseHeaderKeys = [...]string{
 }
 
 func main() {
-	
+
 	fmt.Println("Starting proxy...")
 
 	handler := http.DefaultServeMux
@@ -53,7 +53,8 @@ func main() {
 }
 
 func handleFunc(w http.ResponseWriter, r *http.Request) {
-	fmt.Printf("--> From: %v To: %v Method: %v\n", r.RemoteAddr, r.URL, r.Method)
+	fmt.Printf("--> From: %v To: %v Method: %v\n    Body: %v\n", r.RemoteAddr, r.URL, r.Method, r.Body)
+	r.Header.Set("User-Agent", "proxy")
 
 	// Construct filtered header to send to origin server
 	hh := http.Header{}
@@ -85,7 +86,16 @@ func handleFunc(w http.ResponseWriter, r *http.Request) {
 	defer resp.Body.Close()
 
 	if verbose {
-		fmt.Printf("<-- %v %+v\n", resp.Status, resp.Header)
+		bodyString := ""
+		if resp.StatusCode == http.StatusOK {
+			bodyBytes, err := io.ReadAll(resp.Body)
+			if err != nil {
+				fmt.Printf("%v\n", err)
+			}
+			bodyString = string(bodyBytes)
+			// fmt.Printf("%v\n", bodyString)
+		}
+		fmt.Printf("<-- Status: %v Header: %v\n    Body: %v", resp.Status, resp.Header, bodyString)
 	} else {
 		fmt.Printf("<-- %v\n", resp.Status)
 	}
