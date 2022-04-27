@@ -87,14 +87,14 @@ func handleFunc(w http.ResponseWriter, r *http.Request) {
 
 	if verbose {
 		bodyString := ""
-		if resp.StatusCode == http.StatusOK {
-			bodyBytes, err := io.ReadAll(resp.Body)
-			if err != nil {
-				fmt.Printf("%v\n", err)
-			}
-			bodyString = string(bodyBytes)
-			// fmt.Printf("%v\n", bodyString)
-		}
+		// if resp.StatusCode == http.StatusOK {
+		// 	bodyBytes, err := io.ReadAll(resp.Body)
+		// 	if err != nil {
+		// 		fmt.Printf("%v\n", err)
+		// 	}
+		// 	bodyString = string(bodyBytes)
+		// 	// fmt.Printf("%v\n", bodyString)
+		// }
 		fmt.Printf("<-- Status: %v Header: %v\n    Body: %v", resp.Status, resp.Header, bodyString)
 	} else {
 		fmt.Printf("<-- %v\n", resp.Status)
